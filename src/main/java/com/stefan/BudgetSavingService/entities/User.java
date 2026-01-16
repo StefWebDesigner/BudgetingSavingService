@@ -1,17 +1,17 @@
 package com.stefan.BudgetSavingService.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String firstname;
     private String lastname;
@@ -31,7 +31,16 @@ public class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
     private List<Token> tokens;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+    private List<Dashboard> dashboardList;
 
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Card> listOfCards;

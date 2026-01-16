@@ -20,6 +20,7 @@ public class DashProfile {
     private Integer profileId;
     private Double income;
     private Date addedDate;
+    private String profileName;
 
     @OneToOne
     @JoinColumn(name = "dashboard_id")
