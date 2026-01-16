@@ -18,6 +18,7 @@ public class Dashboard {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer dashboardId;
+    private String dashboardName;
 
     @OneToMany(mappedBy = "dashboard")
     private List<DashItem> dashItem;
@@ -25,4 +26,8 @@ public class Dashboard {
     @OneToOne
     @JoinColumn(name = "profile_id")
     private DashProfile dashProfile;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }
