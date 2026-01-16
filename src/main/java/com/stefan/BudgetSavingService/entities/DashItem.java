@@ -1,5 +1,6 @@
 package com.stefan.BudgetSavingService.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,5 +22,6 @@ public class DashItem {
     private Double remainderAmount;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dashboard_id")
+    @JsonBackReference
     private Dashboard dashboard;
 }
