@@ -1,6 +1,5 @@
 package com.stefan.BudgetSavingService.controller;
 
-import com.stefan.BudgetSavingService.entities.DashProfile;
 import com.stefan.BudgetSavingService.entities.Dashboard;
 import com.stefan.BudgetSavingService.requests.CreateDashProfileRequest;
 import com.stefan.BudgetSavingService.requests.CreateDashboardRequest;
@@ -14,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
-
 
 @RestController
 @RequestMapping("/api/v1/dashboard")
@@ -37,22 +35,10 @@ public class DashboardController {
         }
     }
 
-//    @PostMapping("/createProfile")
-//    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-//    public ResponseEntity<CreateDashProfileResponse> createDashProfile(@RequestBody CreateDashProfileRequest requestedProfile) throws Exception {
-//        DashProfile request = DashProfile.builder().build();
-//        request = dashboardService.createProfile(requestedProfile);
-//        if(request != null) {
-//            return new ResponseEntity<>(dashboardMapper.createDashProfileMapper(request), HttpStatus.CREATED);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//    }
-
     @PostMapping("/createProfile")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-    public ResponseEntity<CreateDashboardResponse> createDashProfile(@RequestBody CreateDashProfileRequest createDashProfileRequest) throws Exception {
-        CreateDashboardResponse request = new  CreateDashboardResponse();
+    public ResponseEntity<CreateDashProfileResponse> createDashProfile(@RequestBody CreateDashProfileRequest createDashProfileRequest) throws Exception {
+        CreateDashProfileResponse request = new  CreateDashProfileResponse();
         request = dashboardService.createProfile(createDashProfileRequest);
         if(request != null) {
 //            return new ResponseEntity<>(dashboardMapper.createDashProfileMapper(request), HttpStatus.CREATED);
@@ -61,12 +47,5 @@ public class DashboardController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
-
-
-
-
-
-
 
 }

@@ -27,7 +27,6 @@ public class CreateDashProfileResponse {
 
     //DashProfile
     private Double income;
-    private LocalDate addedDate;
     private String profileName;
     private Dashboard dashboard;
 }
