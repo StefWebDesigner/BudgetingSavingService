@@ -1,6 +1,7 @@
 package com.stefan.BudgetSavingService.controller;
 
 import com.stefan.BudgetSavingService.entities.Dashboard;
+import com.stefan.BudgetSavingService.entities.MessageRequest;
 import com.stefan.BudgetSavingService.requests.CreateDashProfileRequest;
 import com.stefan.BudgetSavingService.requests.CreateDashboardRequest;
 import com.stefan.BudgetSavingService.responses.CreateDashProfileResponse;
@@ -11,6 +12,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -21,6 +23,7 @@ public class DashboardController {
 
     private final DashboardService dashboardService;
     private final DashboardMapper dashboardMapper;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @PostMapping("/createDashboard")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -47,5 +50,13 @@ public class DashboardController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/text")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public void publish (@RequestBody MessageRequest request){
+        kafkaTemplate.send("BudgetSavingService", request.message());
+    }
+
+
 
 }

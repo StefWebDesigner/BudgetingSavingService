@@ -1,3 +1,7 @@
 -- Swagger UI :
 
 http://localhost:8080/swagger-ui/index.html#/
+
+-- To Run Docker
+
+ docker compose -f /Volumes/M/codingProjects/BudgetSavingService/docker-compose.yml up
